@@ -6,7 +6,10 @@ export default function() {
   return (
     <div className={styles.normal}>
       <Link to="/home">
-      <div className={styles.welcome} />
+        <div className={styles.welcome} />
+      </Link>
+      <Link to="/audio">
+        音频
       </Link>
     </div>
   );

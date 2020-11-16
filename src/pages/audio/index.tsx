@@ -1,8 +1,9 @@
-import React, {Component} from "react";
-import styles from './index.css';
-import ReactJkMusicPlayer from 'react-jinke-music-player';
-import Locale from 'react-jinke-music-player/lib/config/locale';
-import 'react-jinke-music-player/assets/index.css';
+import React from 'react'
+import ReactJkMusicPlayer from '../../../audio'
+import Locale from '../../../audio/config/locale'
+import '../../../audio/styles/index.less'
+import './index.less'
+
 const audioList1 = [
   {
     name: 'Despacito',
@@ -132,37 +133,61 @@ const options = {
     console.log('audio instance', audio)
   },
 };
-class Home extends Component{
-  constructor(props) {
-      super(props);
-      this.audio = {}
-      this.state = {
-        params: {
-          ...options,
-          getAudioInstance: (audio) => {
-            this.audio = audio
-          },
-        },
-      }
-  }
-  componentDidMount(){
 
+class Audio extends React.PureComponent{
+  constructor(props) {
+    super(props)
+    this.audio = {}
   }
+
+  state = {
+    params: {
+      ...options,
+      getAudioInstance: (audio) => {
+        this.audio = audio
+      },
+    },
+  }
+
+  updateParams = (params) => {
+    const data = {
+      ...this.state.params,
+      ...params,
+    }
+    this.setState({
+      params: data,
+    })
+  }
+
+  onPlayModeChange = (e) => {
+    this.updateParams({ playMode: e.target.value })
+  }
+
   render(){
-    const {params} = this.state;
+    const { params } = this.state
   return (
-    <div className={styles.normals}>
-      <button
-          type="button"
-          onClick={() => {
-            this.audio.playbackRate = 10
-          }}
-        >
-          change play back rate to 10
-        </button>
-      <ReactJkMusicPlayer {...params} />
+    <div>
+      <ReactJkMusicPlayer
+            {...params}
+            onThemeChange={(theme) => {
+              console.log('onThemeChange: ', theme)
+              this.updateParams({ theme })
+            }}
+            onModeChange={(mode) => {
+              console.log('onModeChange: ', mode)
+              this.updateParams({ mode })
+            }}
+            onPlayModeChange={(playMode) => {
+              console.log('onPlayModeChange: ', playMode)
+              this.updateParams({ playMode })
+            }}
+            onPlayIndexChange={(playIndex) => {
+              console.log('onPlayIndexChange: ', playIndex)
+              this.updateParams({ playIndex })
+            }}
+          />
     </div>
   );
 }
 }
-export default Home;
+export default Audio;
