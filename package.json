@@ -10,6 +10,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "downloadjs": "^1.4.7",
+    "eslint-loader": "^4.0.2",
     "is-mobile": "^2.2.2",
     "rc-slider": "^9.6.2",
     "rc-switch": "^3.2.2",

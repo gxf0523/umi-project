@@ -581,7 +581,8 @@ export default class ReactJkMusicPlayer extends PureComponent {
                 {DownloadComponent}
                 {ThemeSwitchComponent}
                 {extendsContent || null}
-
+                {/* 倍速选择 */}
+                <span className="group" style={{ width: "120px" }}>倍速</span>
                 {/* 音量控制 */}
                 <span className="group play-sounds" title={locale.volumeText}>
                   {soundValue === 0 ? (
@@ -2022,7 +2023,7 @@ export default class ReactJkMusicPlayer extends PureComponent {
           type: 'image/png',
         }))
       }
-      navigator.mediaSession.metadata = new MediaMetadata(mediaMetaDataConfig)
+      // navigator.mediaSession.metadata = new MediaMetadata(mediaMetaDataConfig)
       this.updateMediaSessionPositionState()
     }
   }
